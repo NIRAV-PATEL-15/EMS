@@ -4,21 +4,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-               -webkit-appearance: none;
-                margin: 0;
-        }
- 
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
-    </style>
-<div class="card">
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+<div class="">
     <div class="card-header @(Model.EmployeeID > 0 ? "bg-warning" : "bg-success") text-light text-uppercase w-100">
         <h4>@(Model.EmployeeID > 0 ? "Edit Employee" : "Add Employee")</h4>
+    </div>
+    @if ( Model.EmployeeID > 0 )
+        {
+        <a class="btn btn-success mt-3 float-end" style="width:200px" asp-action="AddEmployee" asp-controller="Employee" asp-route-id="">+ Add Employee</a>
+        }
 </div>
-</div> 
 
 <form class="mt-2" method="post" style="border:px solid black;border-radius:7px" id="employeeForm">
     <div class="container w-100 p-4 m-auto ">
@@ -27,15 +31,15 @@
         <div class="row m-3">
             <div class="col-md-4">
                 <strong for="FirstName">First Name</strong>
-                <input asp-for="FirstName" type="text" class="form-control" id="FirstName" name="FirstName"  required />
+                <input asp-for="FirstName" type="text" class="form-control" id="FirstName" name="FirstName" required />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="col-md-4">
-                <strong for="LastName">Last Name</strong> 
-                <label for="LastName" style="color:gray">(optional)</label> 
+                <strong for="LastName">Last Name</strong>
+                <label for="LastName" style="color:gray">(optional)</label>
                 <input asp-for="LastName" type="text" class="form-control" id="LastName" name="LastName" placeholder="Patel" />
             </div>
-        </div> 
+        </div>
 
         <!-- Designation -->
         <div class="row m-3">
@@ -70,7 +74,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
 
         <!-- Department -->
         <div class="row m-3">
@@ -78,7 +82,7 @@
                 <strong for="Department">Department</strong>
                 <select asp-for="DepartmentID" id="DepartmentID" class="form-select" name="DepartmentID" required>
                     <option selected>Select</option>
-                    <option  value="1">ASP.NET</option>
+                    <option value="1">ASP.NET</option>
                     <option value="2">PHP</option>
                     <option value="3">JAVA</option>
                     <option value="4">React</option>
@@ -90,25 +94,25 @@
             <strong for="Knowlegde">Have Knowledge of :</strong>
             <div class="ms-3">
                 <div class="row">
-                    @if (Model.Skills != null)
-                    {
-                        @foreach (var skill in Model.Skills)
+                    @if ( Model.Skills != null )
                         {
+                        @foreach ( var skill in Model.Skills )
+                            {
                             <div class="form-check col-md-1">
                                 <input class="form-check-input" type="checkbox" value="@skill.SkillID" id="@skill.SkillID" name="Knowledge" @(Model.SelectedSkills != null && Model.SelectedSkills.Contains(skill.SkillID) ? "checked" : "")>
                                 <label class="form-check-label" for="@skill.SkillID">@skill.SkillName</label>
                             </div>
+                            }
                         }
-                    }
                     else
-                    {
+                        {
                         <p>No skills available.</p>
-                    }
+                        }
                 </div>
             </div>
         </div>
 
-    
+
         <!-- Salary, Joining Date, and Reporting Person -->
         <div class="row m-3">
             <div class="col-md-4">
@@ -121,18 +125,18 @@
             </div>
             <div class="col-md-4">
                 <strong for="ReportingPersonID">Reporting Person</strong>
-                @if (Model.ReportingPerson != null && Model.ReportingPerson.Any())
-                {
+                @if ( Model.ReportingPerson != null && Model.ReportingPerson.Any() )
+                    {
                     <select asp-for="ReportingPersonID" class="form-select" id="ReportingPersonID" name="ReportingPersonID">
                         <option value="">Select Reporting Person</option>
-                        @foreach (var employee in Model.ReportingPerson)
-                        {
+                        @foreach ( var employee in Model.ReportingPerson )
+                            {
                             <option value="@employee.EmployeeID">@($"{employee.FirstName} {employee.LastName}")</option>
-                        }
+                            }
                     </select>
-                }
+                    }
 
-        </div>
+            </div>
         </div>
         <button type="submit" class="btn @(Model.EmployeeID > 0 ?"btn-warning text-light":"btn-success" )">@(Model.EmployeeID > 0 ? "Update Employee" : "Add Employee")</button>
 
@@ -140,11 +144,11 @@
 </form>
 
 <script>
-    document.getElementById("employeeForm").addEventListener("submit", function(event) {
+    document.getElementById("employeeForm").addEventListener("submit", function (event) {
         var firstName = document.getElementById("FirstName").value;
         var department = document.getElementById("Department").value;
         var knowledgeCheckboxes = document.querySelectorAll("input[name='Knowledge']");
-        var isAnyKnowledgeChecked = Array.from(knowledgeCheckboxes).some(function(checkbox) {
+        var isAnyKnowledgeChecked = Array.from(knowledgeCheckboxes).some(function (checkbox) {
             return checkbox.checked;
         });
 
@@ -155,10 +159,10 @@
     });
 </script>
 
-@if (TempData["msg"] != null)
-{
+@if ( TempData["msg"] != null )
+    {
     <script>
         alert('@TempData["msg"].ToString();');
         window.location.href = "@Url.Action("Index","Employee")";
     </script>
-}
+    }

@@ -5,12 +5,32 @@
       "PackagePath": "staticwebassets\\Employee Management System.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\NIRAV\\Desktop\\EMS-main\\EMS-main\\Employee Management System\\wwwroot\\DataTable\\jquery.dataTables.js",
+      "PackagePath": "staticwebassets\\DataTable\\jquery.dataTables.js"
+    },
+    {
+      "Id": "C:\\Users\\NIRAV\\Desktop\\EMS-main\\EMS-main\\Employee Management System\\wwwroot\\DataTable\\jquery.dataTables.min.js",
+      "PackagePath": "staticwebassets\\DataTable\\jquery.dataTables.min.js"
+    },
+    {
+      "Id": "C:\\Users\\NIRAV\\Desktop\\EMS-main\\EMS-main\\Employee Management System\\wwwroot\\css\\jquery.dataTables.css",
+      "PackagePath": "staticwebassets\\css\\jquery.dataTables.css"
+    },
+    {
+      "Id": "C:\\Users\\NIRAV\\Desktop\\EMS-main\\EMS-main\\Employee Management System\\wwwroot\\css\\jquery.dataTables.min.css",
+      "PackagePath": "staticwebassets\\css\\jquery.dataTables.min.css"
+    },
+    {
       "Id": "C:\\Users\\NIRAV\\Desktop\\EMS-main\\EMS-main\\Employee Management System\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\NIRAV\\Desktop\\EMS-main\\EMS-main\\Employee Management System\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\NIRAV\\Desktop\\EMS-main\\EMS-main\\Employee Management System\\wwwroot\\js\\DataTable.js",
+      "PackagePath": "staticwebassets\\js\\DataTable.js"
     },
     {
       "Id": "C:\\Users\\NIRAV\\Desktop\\EMS-main\\EMS-main\\Employee Management System\\wwwroot\\js\\site.js",

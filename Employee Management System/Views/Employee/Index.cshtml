@@ -4,7 +4,12 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    .table-head-text {
+        text-decoration: none;
+        color: white;
+    }
+</style>
 <div class="card">
     <div class="card-header bg-success text-white text-uppercase">
         <h4>Employee List</h4>
@@ -13,35 +18,127 @@
 
 
 <div class="container mt-4">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Full Name</th>
-                <th>Designation</th>
-                <th>Department</th>
-                <th>Joining Date</th>
-                <th>Reporting Person</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var employee in Model)
-            {
-                <tr>
-                    <td>@($"{employee.FirstName} {employee.LastName}")</td>
-                    <td>@employee.DesignationName</td>
-                    <td>@employee.DepartmentName</td>
-                    <td>@employee.JoiningDate.ToShortDateString()</td>
-                    <td>@employee.ReportingPersonName</td>
-                    <td>
-                        <a href="@Url.Action("AddEmployee", "Employee", new { id = employee.EmployeeID })" class="btn btn-primary ">Edit</a>
-                        <a href="#" class="btn btn-danger delete-employee" data-employee-id="@employee.EmployeeID">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-8">
+
+            <table class="table table-striped" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Designation</th>
+                        <th>Department</th>
+                        <th>Joining Date</th>
+                        <th>Reporting Person</th>
+                        <th data-sortable="false">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ( var employee in Model )
+                        {
+                        <tr>
+                            <td>@($"{employee.FirstName} {employee.LastName}")</td>
+                            <td>@employee.DesignationName</td>
+                            <td>@employee.DepartmentName</td>
+                            <td>@employee.JoiningDate.ToShortDateString()</td>
+                            <td>@employee.ReportingPersonName</td>
+                            <td>
+                                <a href="@Url.Action("AddEmployee", "Employee", new { id = employee.EmployeeID })" class="btn btn-primary ">Edit</a>
+                                <a href="#" class="btn btn-danger delete-employee" data-employee-id="@employee.EmployeeID">Delete</a>
+                            </td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+
+
+            <form method="get" action="@Url.Action("Index", "Employee")">
+                <div class="mb-3">
+                    <label for="searchName" class="form-label"> Name</label>
+                    <input type="text" class="form-control" id="searchName" name="searchName" placeholder="Search by Name">
+                </div>
+                <div class="mb-3">
+                    <label for="searchDepartment" class="form-label">Department</label>
+                    <select class="form-select" id="searchDepartment" name="searchDepartment">
+                        <option value="">All</option>
+                        <option value="ASP.Net">ASP.NET</option>
+                        <option value="PHP">PHP</option>
+                        <option value="JAVA">JAVA</option>
+                        <option value="React">React</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Joining Date</label>
+                    <div class="row">
+                        <div class="col">
+                            <label for="From">From</label>
+                            <input type="date" class="form-control" id="searchJoiningDateFrom" name="searchJoiningDateFrom" placeholder="From">
+                        </div>
+                        <div class="col">
+                            <label for="To">To</label>
+                            <input type="date" class="form-control" id="searchJoiningDateTo" name="searchJoiningDateTo" placeholder="To">
+                        </div>
+                    </div>
+                </div>
+                @*  <div class="mb-3">
+                <label for="searchKnowledge" class="form-label">Have Knowledge of</label>
+                <div class="form-check">
+                <div class="row">
+                <div class="form-check col-md-3">
+                <input class="form-check-input" type="checkbox" value="1" id="searchKnowledge" name="searchKnowledge">
+                <label class="form-check-label" for="searchKnowledgeMVC">MVC</label>
+                </div>
+                <div class="form-check col-md-3">
+                <input class="form-check-input" type="checkbox" value="2" id="searchKnowledge" name="searchKnowledge">
+                <label class="form-check-label" for="searchKnowledgeVB">VB</label>
+                </div>
+                <div class="form-check col-md-3">
+                <input class="form-check-input" type="checkbox" value="3" id="searchKnowledge" name="searchKnowledge">
+                <label class="form-check-label" for="searchKnowledgeSQL">SQL</label>
+                </div>
+                <div class="form-check col-md-3">
+                <input class="form-check-input" type="checkbox" value="4" id="searchKnowledge" name="searchKnowledge">
+                <label class="form-check-label" for="searchKnowledgeJquery">Jquery</label>
+                </div>
+                <div class="form-check col-md-3">
+                <input class="form-check-input" type="checkbox" value="5" id="searchKnowledge" name="searchKnowledge">
+                <label class="form-check-label" for="searchKnowledgeJavaScript">JavaScript</label>
+                </div>
+                <div class="form-check col-md-3">
+                <input class="form-check-input" type="checkbox" value="6" id="searchKnowledge" name="searchKnowledge">
+                <label class="form-check-label" for="searchKnowledgeAngularJS">AngularJS</label>
+                </div>
+                <div class="form-check col-md-3">
+                <input class="form-check-input" type="checkbox" value="7" id="searchKnowledge" name="searchKnowledge">
+                <label class="form-check-label" for="searchKnowledgeNodeJS">NodeJS</label>
+                </div>
+
+                </div>
+                </div>
+                </div>
+                *@
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success mb-3">Search</button>
+
+                    </div>
+                    <div class="col-md-4">
+
+                        <a class="btn btn-danger" asp-action="Index" asp-controller="Employee">Clear Filters</a>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+
+    </div>
 </div>
+@section Scripts{
+    <script src="~/js/DataTable.js"></script>
+}
 <script>
     document.addEventListener('click', function (e) {
         if (e.target.matches('.delete-employee')) {
@@ -55,9 +152,9 @@
 
 </script>
 
-@if (TempData["msg"] != null)
-{
+@if ( TempData["msg"] != null )
+    {
     <script>
         alert('@TempData["msg"].ToString();');
     </script>
-}
+    }
